@@ -149,3 +149,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initial fetch
   fetchShipments()
 })
+
+const mergeBtn = document.getElementById('mergeBtn')
+mergeBtn.addEventListener('click', () => {
+  const url =
+    'https://mini-shipping-manager-backend.onrender.com/api/shipments/merge-last-5'
+  window.open(url, '_blank') // triggers download
+})
