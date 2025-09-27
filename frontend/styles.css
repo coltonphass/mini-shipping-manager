@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Muli:400,600,700&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #f2f2f2; /* light neutral background */
-  color: #351e0a; /* dark brown text */
+  background-color: #f2f2f2;
+  color: #351e0a;
   font-family: 'Muli', sans-serif;
   display: flex;
   flex-direction: column;
@@ -14,14 +14,50 @@ body {
   justify-content: center;
   min-height: 100vh;
   margin: 0;
+  padding: 10px; /* Add padding for desktop */
+  line-height: 1.6;
+}
+
+/* Mobile-first: minimal padding on small screens */
+@media (max-width: 768px) {
+  body {
+    padding: 0; /* No padding on mobile */
+    justify-content: flex-start; /* Start from top on mobile */
+  }
 }
 
 .container {
-  background-color: #fff8f0; /* light cream card */
+  background-color: #fff8f0;
   padding: 25px 40px;
   border-radius: 10px;
-  width: 460px;
+  width: 100%; /* Make it responsive */
+  max-width: 500px; /* Keep max width */
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  margin: 10px; /* Add margin for better spacing */
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 20px;
+    margin: 0; /* Remove margin on mobile for full width */
+    border-radius: 0; /* Remove border radius on mobile */
+    width: 100%;
+    max-width: none; /* Allow full width */
+    box-shadow: none; /* Remove shadow since it fills screen */
+    min-height: 100vh; /* Fill the screen height */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px 15px; /* Minimal horizontal padding */
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
+  }
 }
 
 .container h1,
@@ -29,6 +65,21 @@ body {
   text-align: center;
   margin-bottom: 20px;
   color: #351e0a;
+  font-weight: 600;
+}
+
+.container h1 {
+  font-size: 1.8em;
+}
+
+@media (max-width: 480px) {
+  .container h1 {
+    font-size: 1.5em;
+  }
+
+  .container h2 {
+    font-size: 1.3em;
+  }
 }
 
 .form-control {
@@ -48,6 +99,16 @@ body {
   font-size: 18px;
   color: #351e0a;
   appearance: none;
+  transition: border-bottom-color 0.3s ease;
+}
+
+/* Better mobile input sizing */
+@media (max-width: 480px) {
+  .form-control input,
+  .form-control select {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 12px 0;
+  }
 }
 
 .form-control input:focus,
@@ -55,7 +116,13 @@ body {
 .form-control select:focus,
 .form-control select:valid {
   outline: 0;
-  border-bottom-color: #ffb500; /* gold highlight */
+  border-bottom-color: #ffb500;
+}
+
+/* Add focus ring for accessibility */
+.form-control input:focus,
+.form-control select:focus {
+  box-shadow: 0 2px 0 0 #ffb500;
 }
 
 .form-control label {
@@ -72,12 +139,19 @@ body {
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+@media (max-width: 480px) {
+  .form-control label span {
+    font-size: 16px;
+  }
+}
+
 .form-control input:focus + label span,
 .form-control input:valid + label span,
 .form-control select:focus + label span,
 .form-control select:valid + label span {
-  color: #ffb500; /* floating gold label */
+  color: #ffb500;
   transform: translateY(-30px);
+  font-size: 14px; /* Smaller when floating */
 }
 
 /* Buttons */
@@ -85,77 +159,118 @@ body {
   cursor: pointer;
   display: inline-block;
   width: 100%;
-  background-color: #ffb500; /* gold button */
+  background-color: #ffb500;
   color: #351e0a;
   padding: 15px;
   font-family: inherit;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
   border: 0;
-  border-radius: 5px;
-  transition: 0.2s;
+  border-radius: 8px; /* Slightly more rounded */
+  transition: all 0.2s ease;
   margin-top: 10px;
+  min-height: 48px; /* Better touch target */
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
   background-color: #e6a800;
   color: #fff;
-  transform: scale(1.02);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 181, 0, 0.3);
 }
 
 .btn:active {
-  transform: scale(0.98);
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Cards for shipments */
 .card {
-  background-color: #fff3e0; /* light cream for card */
-  padding: 15px 30px;
+  background-color: #fff3e0;
+  padding: 18px 25px;
   margin-bottom: 15px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   color: #351e0a;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  border-left: 4px solid #ffb500; /* Add accent border */
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 15px 20px;
+    margin-bottom: 12px;
+  }
 }
 
 .card strong {
   display: block;
   font-size: 18px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c1607; /* Slightly darker for hierarchy */
+}
+
+@media (max-width: 480px) {
+  .card strong {
+    font-size: 16px;
+  }
 }
 
 .card div {
   margin: 5px 0;
+  font-size: 15px;
+}
+
+@media (max-width: 480px) {
+  .card div {
+    font-size: 14px;
+  }
 }
 
 /* Download links */
 .download-link {
   display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: #ffb500; /* gold */
+  margin-top: 12px;
+  padding: 10px 16px;
+  background-color: #ffb500;
   color: #351e0a;
-  font-weight: bold;
-  border-radius: 5px;
+  font-weight: 600;
+  border-radius: 6px;
   text-decoration: none;
-  transition: 0.2s;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  min-height: 40px; /* Better touch target */
+  line-height: 1.4;
 }
 
 .download-link:hover {
   background-color: #e6a800;
   color: #fff;
-  transform: scale(1.02);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(255, 181, 0, 0.3);
 }
 
 .download-link:active {
-  transform: scale(0.98);
+  transform: translateY(0);
 }
 
 .label-pending {
   font-style: italic;
   color: #bfa57a;
+  font-size: 13px;
 }
 
-/* Notification */
+/* Notification - Make it mobile friendly */
 #notification {
   position: fixed;
   top: 20px;
@@ -163,14 +278,26 @@ body {
   transform: translateX(-50%);
   background-color: #351e0a;
   color: #ffb500;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 12px 20px;
+  border-radius: 8px;
   display: none;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-width: calc(100vw - 40px); /* Prevent overflow */
+  text-align: center;
 }
 
-/* Modal Styles */
+@media (max-width: 480px) {
+  #notification {
+    top: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    max-width: calc(100vw - 20px);
+  }
+}
+
+/* Modal Styles - Enhanced for mobile */
 .modal {
   position: fixed;
   z-index: 2000;
@@ -178,19 +305,37 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 10px;
+  }
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto;
   border: none;
   border-radius: 12px;
-  width: 90%;
+  width: 100%;
   max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: modalSlideIn 0.3s ease-out;
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    border-radius: 8px;
+    max-height: 95vh;
+  }
 }
 
 @keyframes modalSlideIn {
@@ -214,10 +359,23 @@ body {
   border-radius: 12px 12px 0 0;
 }
 
+@media (max-width: 480px) {
+  .modal-header {
+    padding: 15px 20px 12px;
+    border-radius: 8px 8px 0 0;
+  }
+}
+
 .modal-header h3 {
   margin: 0;
   font-size: 1.4em;
   font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .modal-header h3 {
+    font-size: 1.2em;
+  }
 }
 
 .close {
@@ -228,6 +386,8 @@ body {
   line-height: 1;
   opacity: 0.8;
   transition: opacity 0.2s;
+  padding: 5px; /* Better touch target */
+  margin: -5px;
 }
 
 .close:hover {
@@ -235,15 +395,35 @@ body {
   transform: scale(1.1);
 }
 
+@media (max-width: 480px) {
+  .close {
+    font-size: 24px;
+    padding: 8px;
+    margin: -8px;
+  }
+}
+
 .modal-body {
   padding: 25px;
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .modal-body {
+    padding: 20px;
+  }
 }
 
 .modal-body p {
   font-size: 1.1em;
   margin-bottom: 15px;
   color: #333;
+}
+
+@media (max-width: 480px) {
+  .modal-body p {
+    font-size: 1em;
+  }
 }
 
 #shipmentDetails {
@@ -255,6 +435,13 @@ body {
   border-left: 4px solid #28a745;
 }
 
+@media (max-width: 480px) {
+  #shipmentDetails {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
 #shipmentDetails strong {
   color: #28a745;
 }
@@ -262,6 +449,12 @@ body {
 .modal-footer {
   padding: 15px 25px 25px;
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .modal-footer {
+    padding: 12px 20px 20px;
+  }
 }
 
 .btn-success {
@@ -275,10 +468,70 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   min-width: 100px;
+  min-height: 44px; /* Better touch target */
 }
 
 .btn-success:hover {
   background: linear-gradient(135deg, #218838, #1ea080);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+@media (max-width: 480px) {
+  .btn-success {
+    padding: 12px 25px;
+    font-size: 0.9em;
+    min-width: 80px;
+  }
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #ffb500;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
