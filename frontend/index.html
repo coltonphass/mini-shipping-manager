@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mini Shipping Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Mini Shipping Manager</h1>
+
+      <!-- Success Modal -->
+      <div id="successModal" class="modal" style="display: none">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>✅ Success!</h3>
+            <span class="close" id="closeModal">&times;</span>
+          </div>
+          <div class="modal-body">
+            <p id="successMessage">Shipment created successfully!</p>
+            <div id="shipmentDetails"></div>
+          </div>
+          <div class="modal-footer">
+            <button id="modalOkBtn" class="btn btn-success">OK</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error notification (quick) -->
+      <div
+        id="notification"
+        class="notification"
+        style="
+          display: none;
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #dc3545;
+          color: white;
+          padding: 10px 20px;
+          border-radius: 5px;
+          z-index: 1000;
+          max-width: 300px;
+          word-wrap: break-word;
+        "
+      ></div>
+
+      <form id="shipForm" class="form">
+        <div class="form-control">
+          <input required name="recipient" type="text" />
+          <label><span>Recipient Name</span></label>
+        </div>
+        <div class="form-control">
+          <input required name="address" type="text" />
+          <label><span>Address</span></label>
+        </div>
+        <div class="form-control">
+          <input required name="weight" type="number" step="0.1" />
+          <label><span>Weight (lbs)</span></label>
+        </div>
+        <div class="form-control">
+          <select name="service" required>
+            <option value="" disabled selected></option>
+            <option value="ground">Ground</option>
+            <option value="2-day">2-Day</option>
+            <option value="overnight">Overnight</option>
+          </select>
+          <label><span>Service</span></label>
+        </div>
+        <button type="button" id="createShipmentBtn" class="btn">
+          Create Shipment
+        </button>
+      </form>
+      <h2>Recent Shipments</h2>
+      <div id="list"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
