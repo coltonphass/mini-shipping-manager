@@ -1,4 +1,4 @@
-const API = 'https://mini-shipping-manager-backend.onrender.com/shipments'
+const API = 'https://mini-shipping-manager-backend.onrender.com/api/shipments'
 
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('shipForm')
