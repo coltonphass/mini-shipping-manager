@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Success notification
   function showSuccessMessage(shipment) {
-    notif.innerHTML = `✅ Shipment created successfully!<br>
+    notif.innerHTML = `Shipment created successfully!<br>
       <strong>Recipient:</strong> ${escapeHtml(shipment.recipient)}<br>
       <strong>Service:</strong> ${escapeHtml(shipment.service)}<br>
       <strong>Weight:</strong> ${shipment.weight} lbs`
